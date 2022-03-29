@@ -8,46 +8,6 @@ from PIL import Image
 from sklearn.model_selection import train_test_split
 
 
-def sampling(mu_log_var):
-    mu, log_var = mu_log_var
-    sampling_epsilon = tf.keras.backend.random_normal(shape=tf.keras.backend.shape(mu), mean=0.0, stddev=1.0)
-    random_sample = mu + tf.keras.backend.exp(log_var/2) * sampling_epsilon
-    return random_sample
-
-
-def loss_func(encoder_mu, encoder_log_variance):
-    def vae_reconstruction_loss(y_true, y_predict):
-        reconstruction_loss_factor = 1000 # This value is used only for vizual comfort
-        reconstruction_loss = tf.keras.backend.mean(tf.keras.backend.square(y_true-y_predict), axis=[1, 2, 3])
-        return reconstruction_loss_factor * reconstruction_loss
-
-    def vae_kl_loss(encoder_mu, encoder_log_variance):
-        kl_loss = -0.5 * tf.keras.backend.sum(1.0 + encoder_log_variance - tf.keras.backend.square(encoder_mu) - tf.keras.backend.exp(encoder_log_variance), axis=[1, 2, 3])
-        return kl_loss
-
-    def vae_kl_loss_metric(y_true, y_predict):
-        kl_loss = -0.5 * tf.keras.backend.sum(1.0 + encoder_log_variance - tf.keras.backend.square(encoder_mu) - tf.keras.backend.exp(encoder_log_variance), axis=[1, 2, 3])
-        return kl_loss
-
-    def vae_loss(y_true, y_predict):
-        reconstruction_loss = vae_reconstruction_loss(y_true, y_predict)
-        kl_loss = vae_kl_loss(y_true, y_predict)
-        loss = reconstruction_loss + kl_loss
-        return loss
-
-    return vae_loss
-
-
-def Load_File_Name(passed_dir):
-    file_list = []
-    for (root, directories, files) in os.walk(passed_dir):
-        for file in files:
-            file_path = os.path.join(root, file)
-            file_list.append(file_path)
-
-    return file_list
-
-
 def Stackin_Data(img_file_list, CP_file_list):
     img_file_num = len(img_file_list)
     # CP_file_num = len(CP_file_list)
@@ -98,6 +58,7 @@ def MLP_model(z_dim):
 if __name__ == '__main__':
 
     latent_dim = 10
+    encoder_path = 'your encoder path.h5'
 
     ## Stacking a dataset ##
     img_path_dir = 'your image path'
@@ -117,7 +78,6 @@ if __name__ == '__main__':
 
     # Expand dims to fit the input of encoder
     img_stacking = np.expand_dims(img_stacking, -1)
-    encoder_path = 'encoder_'+str(latent_dim)+'_'+image_method+'.h5'
 
     # Load encoder of CAE
     if (os.path.exists(encoder_path)):
@@ -126,7 +86,8 @@ if __name__ == '__main__':
         print("Encoder model exist & loaded ...")
 
     else:
-        print("There is no file! Check " + encoder_path + ' ...')
+        sys.stderr.write("There is no file! Check " + encoder_path + ' ...')
+        exit(2)
 
     encoder_result_stacking = encoder.predict(img_stacking)
 
