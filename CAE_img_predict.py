@@ -9,7 +9,9 @@ from tensorflow import keras
 # to see the difference between input image and CAE-reconstructed ouput image
 
 if __name__ == '__main__':
-    path_dir = 'your image path dir'
+    path_dir = 'your image dir path'
+    encoder_path = 'your CAE encoder path'
+    decoder_path = 'your CAE decoder path'
 
     file_name = []
     file_list = []
@@ -31,13 +33,11 @@ if __name__ == '__main__':
 
     img_stacking = np.expand_dims(img_stacking, -1)
 
-    encoder_path = 'encoder_'+str(latent_dim)+'_'+EIT_method+'.h5'
     if (os.path.exists(encoder_path)):
         encoder = keras.models.load_model(encoder_path, compile=False)
         # encoder.summary()
         print("Encoder model exist & loaded ...")
 
-    decoder_path = './decoder_'+str(latent_dim)+'_'+EIT_method+'.h5'
     if (os.path.exists(decoder_path)):
         decoder = keras.models.load_model(decoder_path, compile=False)
         # decoder.summary()
