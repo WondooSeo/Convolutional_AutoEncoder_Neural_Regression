@@ -4,7 +4,7 @@
 
 Language : Python 3
 
-Package : Tensorflow 2, Keras, numpy, scikit-learn, matplotlib, pillow, scipy
+Package : Tensorflow 2, Keras, numpy, scikit-learn, matplotlib, pillow, scipy (See [***Here***](https://github.com/WondooSeo/Convolutional_AutoEncoder_Neural_Regression/blob/main/package_requirements.txt))
 
 ### Model architecture
 
