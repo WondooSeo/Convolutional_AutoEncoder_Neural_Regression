@@ -135,9 +135,8 @@ if __name__ == '__main__':
     CAE = Model(CAE_input, CAE_decoder_output, name='CAE')
     CAE.summary()
 
-    # KDL = KLDivergence()
     CAE.compile(optimizer='adam', loss='mse', metrics=['mae', 'binary_crossentropy'])
-    history = CAE.fit(x_train, x_train, validation_split=0.15, epochs=50, batch_size=50, verbose=1, shuffle=True)
+    history = CAE.fit(x_train, x_train, validation_split=0.15, epochs=30, batch_size=50, verbose=1, shuffle=True)
 
     # Latent vector code
     z_sample = [[1] * latent_dim]
