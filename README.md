@@ -8,5 +8,4 @@ Package : Tensorflow 2, Keras, numpy, scikit-learn, matplotlib, pillow, scipy (S
 
 ### Model architecture
 
-![CAENR model](https://user-images.githubusercontent.com/62936579/162565104-35e2150e-1f3e-4847-9887-25f84171988c.png)
-
+![CAENR model](https://user-images.githubusercontent.com/62936579/163724072-44bbf9e2-c405-4a24-8e99-201a0a16b604.png)
