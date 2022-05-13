@@ -40,11 +40,9 @@ def Stackin_Data(img_file_list, CP_file_list):
 def MLP_model(z_dim):
     MLP_model = tf.keras.Sequential(name='MLP_Model')
     MLP_model.add(tf.keras.layers.Dense(64, input_shape=(z_dim,)))
-    MLP_model.add(tf.keras.layers.Dropout(0.5))
     MLP_model.add(tf.keras.layers.BatchNormalization())
     MLP_model.add(tf.keras.layers.ReLU())
     MLP_model.add(tf.keras.layers.Dense(64))
-    MLP_model.add(tf.keras.layers.Dropout(0.5))
     MLP_model.add(tf.keras.layers.BatchNormalization())
     MLP_model.add(tf.keras.layers.ReLU())
     MLP_model.add(tf.keras.layers.Dense(1, activation="sigmoid"))
