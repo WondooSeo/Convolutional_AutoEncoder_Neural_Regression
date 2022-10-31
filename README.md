@@ -2,6 +2,8 @@
 
 # Convolutional AutoEncoder Neural Regression
 
+[Recommended] There is some problems on git commit, so it is not recommenced to fork this repo.
+
 Language : Python 3
 
 Package : Keras, numpy, scikit-learn, matplotlib, pillow, scipy (See [***Here***](https://github.com/WondooSeo/Convolutional_AutoEncoder_Neural_Regression/blob/main/package_requirements.txt))
